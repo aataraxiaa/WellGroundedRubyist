@@ -1,5 +1,9 @@
 class Ticket
-  attr_reader :venue, :date, :price
+  attr_accessor :price
+
+  def Ticket.most_expensive(*tickets)
+    tickets.max_by(&:price)
+  end
 
   def initialize(venue)
     @venue = venue
@@ -11,15 +15,6 @@ class Ticket
 
   def date
     @date
-  end
-
-  def price=(amount)
-    @price = amount
-    "hi"
-  end
-
-  def price
-    @price
   end
 
   def discount(percent)
@@ -39,6 +34,12 @@ end
 
 th = Ticket.new("Town Hall")
 th.price = 100.00
+puts th.price
 puts "The ticket for #{th.venue} has been discounted 15% to #{th.discount(15)}"
 th.date = "22-02-01"
 puts th.date = "2022-02-01"
+
+th1 = Ticket.new("Test Ticket")
+th1.price = 20
+
+puts Ticket.most_expensive(th, th1).price
