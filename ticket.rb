@@ -1,4 +1,12 @@
+module MyFirstModule
+  def ruby_version
+    system("ruby -v")
+  end
+end
+
 class Ticket
+  include MyFirstModule
+
   attr_accessor :price
 
   def Ticket.most_expensive(*tickets)
@@ -43,3 +51,4 @@ th1 = Ticket.new("Test Ticket")
 th1.price = 20
 
 puts Ticket.most_expensive(th, th1).price
+puts th.ruby_version
