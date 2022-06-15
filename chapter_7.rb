@@ -113,6 +113,7 @@ combined = 'Hi ' + person
 puts combined
 
 # Array role-playing with to_ary
+puts "\n# Array role-playing with to_ary"
 class Person
   def to_ary
     [@name, @age]
@@ -166,3 +167,76 @@ puts nil.to_i
 puts nil.object_id
 
 # Comparing two objects
+
+# Equality tests
+puts "\n# Equality tests"
+a = Object.new
+puts a == a
+puts a != a
+puts a.eql?(a)
+puts a.equal?(a)
+
+string1 = 'text'
+string2 = 'text'
+puts string1 == string2
+puts string1.eql?(string2)
+puts string1.equal?(string2)
+
+# Comparisons and the Comparable module
+puts "\n# Comparisons and the Comparable module"
+class ComparableObject
+  include Comparable
+  attr_accessor :value
+
+  def <=>(other)
+    value <=> other.value
+  end
+end
+
+c1 = ComparableObject.new
+c1.value = 10
+c2 = ComparableObject.new
+c2.value = 20
+c3 = ComparableObject.new
+c3.value = 30
+
+puts c1 <=> c1
+puts c1 <=> c2
+puts c3 <=> c2
+puts c1 < c2
+puts c1 > c3
+puts c3 > c2
+puts c2.between?(c1,c3)
+
+# Inspecting object capabilities
+puts "\n# Inspecting object capabilities"
+
+# Listing an object's methods
+puts "\n# Listing an object's methods"
+puts "I am a string".methods.count
+puts String.methods.count
+
+str = "A string!"
+def str.new_method
+  1
+end
+puts str.methods.count
+puts str.singleton_methods.count
+
+# Querying class and module objects
+puts "\n# Querying class and module objects"
+puts String.instance_methods.count
+puts Comparable.instance_methods.count
+
+# Filtered and selected methods lists
+puts "\n# Filtered and selected methods lists"
+puts String.instance_methods(false).count
+
+puts "text".private_methods.count
+puts "text".public_methods.count
+puts "text".protected_methods.count
+puts "text".singleton_methods.count
+
+puts String.private_instance_methods.count
+puts String.protected_instance_methods.count
+puts String.public_instance_methods.count
